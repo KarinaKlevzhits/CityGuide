@@ -35,7 +35,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :trackable, :omniauthable
   has_one :profile
   has_many :organizations
-  has_many :route
+  has_many :routes
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider

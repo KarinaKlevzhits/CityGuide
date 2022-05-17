@@ -26,31 +26,31 @@ class PlacesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-end
 
-# PATCH/PUT /places/1 or /places/1.json
-def update
-  if @place.update(place_params)
-    redirect_to place_url(@place), notice: 'Place was successfully updated.'
-  else
-    render :edit, status: :unprocessable_entity
+  # PATCH/PUT /places/1 or /places/1.json
+  def update
+    if @place.update(place_params)
+      redirect_to place_url(@place), notice: 'Place was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
-end
 
-# DELETE /places/1 or /places/1.json
-def destroy
-  @place.destroy
-  redirect_to places_url, notice: 'Place was successfully destroyed.'
-end
+  # DELETE /places/1 or /places/1.json
+  def destroy
+    @place.destroy
+    redirect_to places_url, notice: 'Place was successfully destroyed.'
+  end
 
   private
 
-# Use callbacks to share common setup or constraints between actions.
-def place
-  @place = Place.find(params[:id])
-end
+  # Use callbacks to share common setup or constraints between actions.
+  def place
+    @place = Place.find(params[:id])
+  end
 
-# Only allow a list of trusted parameters through.
-def place_params
-  params.require(:place).permit(:name, :latitude, :longitude)
+  # Only allow a list of trusted parameters through.
+  def place_params
+    params.require(:place).permit(:name, :latitude, :longitude)
+  end
 end
