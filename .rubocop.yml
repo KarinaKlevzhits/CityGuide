@@ -26,3 +26,16 @@ Style/FrozenStringLiteralComment:
   
 Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/policies/**/*'
