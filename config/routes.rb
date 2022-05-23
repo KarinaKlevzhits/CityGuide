@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :organizations do
+    resources :reviews
     collection do
       put 'approve', to: 'organizations#approve'
       get 'approve', to: 'organizations#approve'
