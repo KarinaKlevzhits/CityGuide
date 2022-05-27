@@ -1,0 +1,8 @@
+<h1>Edit Review</h1>
+<%= simple_form_for([@organization, @review]) do |f|%>
+  <%= f.input :rating %>
+  <%= f.input :comment %>
+  <div class="actions">
+    <%= f.submit :class=> "btn btn-primary",style: "background-color: #91D6F1;"%>
+  </div>
+<% end %>

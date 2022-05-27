@@ -74,6 +74,12 @@
   <strong>Longitude:</strong>
   <%= @organization.place.longitude %>
 </p>
+
+<%= render @organization.reviews %>
+<div>
+  <%= link_to "Add Review", new_organization_review_path(@organization)  %>
+</div>
+
 <center>
   <p>
     <div id="map"></div>
