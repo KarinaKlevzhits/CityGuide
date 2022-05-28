@@ -7,6 +7,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import RequestShortener from "webpack/lib/RequestShortener"
 
 //= require jquery3
 //= require_tree
@@ -14,8 +15,11 @@ import "channels"
 //= require jquery_ujs
 //= require popper
 //= require bootstrap-sprockets
-
-
+//= require rails-ujs
+//= require jquery.raty
+require("packs/jquery.raty")
+require("channels")
+require("jquery")
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

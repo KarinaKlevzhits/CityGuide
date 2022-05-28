@@ -1,92 +1,3 @@
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script>
-  function initMap(lat, lng) {
-      var myCoords = new google.maps.LatLng(lat, lng);
-      var mapOptions = {
-          center: myCoords,
-          zoom: 14
-      };
-
-      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      var marker = new google.maps.Marker({
-          position: myCoords,
-          map: map
-      });
-  document.addEventListener("DOMContentLoaded", function(){
-
-        initMap(<%=@organization.place.latitude%>, <%=@organization.place.longitude%>)
-      });
-  }
-</script>
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
-<% end %>
-<% if @organization.images.attached? %>
-  <% @organization.images.each do |image| %>
-    <%= image_tag image.variant(resize_to_limit: [250, 250]).processed %>
-  <% end %>
-<% end %>
-<p>
-  <strong>Title:</strong>
-  <%= @organization.title %>
-</p>
-<p>
-  <strong>Min price:</strong>
-  <%= @organization.min_price %>
-</p>
-<p>
-  <strong>Min time:</strong>
-  <%= @organization.min_time %>
-</p>
-<p>
-  <strong>Price one hour:</strong>
-  <%= @organization.price_one_hour %>
-</p>
-<p>
-  <strong>Price two hours:</strong>
-  <%= @organization.price_two_hours %>
-</p>
-<p>
-  <strong>Start work:</strong>
-  <%= @organization.start_work.strftime('%H:%M') %>
-</p>
-<p>
-  <strong>End work:</strong>
-  <%= @organization.end_work.strftime('%H:%M') %>
-</p>
-<p>
-  <strong>Type of services:</strong>
-  <%= @organization.type_of_services %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= @organization.status %>
-</p>
-<p>
-  <strong>Name place:</strong>
-  <%= @organization.place.name %>
-</p>
-<p>
-  <strong>Latitude:</strong>
-  <%= @organization.place.latitude %>
-</p>
-<p>
-  <strong>Longitude:</strong>
-  <%= @organization.place.longitude %>
-</p>
-<%= render @organization.reviews %>
-<div>
-  <%= link_to "Add Review", new_organization_review_path(@organization)  %>
-</div>
-<center>
-  <p>
-    <div id="map"></div>
-  </p>
-</center>
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
-<script>
 (function($) {
   'use strict';
 
@@ -822,9 +733,9 @@
     scoreName    : 'score',
     single       : false,
     space        : true,
-    starHalf     : "<%= asset_path 'star-half.png' %>",
-    starOff      : "<%= asset_path 'star-off.png' %>",
-    starOn       : "<%= asset_path 'star-on.png' %>",
+    starHalf     : 'star-half.png',
+    starOff      : 'star-off.png',
+    starOn       : 'star-on.png',
     starType     : 'img',
     target       : undefined,
     targetFormat : '{score}',
@@ -835,12 +746,3 @@
   };
 
 })(jQuery);
-</script>
-<script>
-	$('.review-rating').raty({
-		readOnly: true,
-		score: function() {
-			return $(this).attr('data-score');
-		}
-	});
-</script>
