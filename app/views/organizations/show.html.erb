@@ -13,14 +13,16 @@
           position: myCoords,
           map: map
       });
-  document.addEventListener("DOMContentLoaded", function(){
+  }
+  </script>
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
 
         initMap(<%=@organization.place.latitude%>, <%=@organization.place.longitude%>)
       });
-  }
-</script>
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
+    </script>
 <% end %>
 <% if @organization.images.attached? %>
   <% @organization.images.each do |image| %>
