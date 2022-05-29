@@ -748,19 +748,21 @@
 
   })(jQuery);
 </script>
+<center>
 <%= simple_form_for([@organization, @organization.reviews.build]) do |f| %>
-  <div id = "rating-form">
-    <script>
-      $('#rating-form').raty({
-       scoreName: 'review[rating]'
-       });
-    </script>
-    <br>
-    <div class="field">
-      <%= f.input :comment %>
-    </div>
-    <div class="actions">
-      <%= f.submit :class=> "btn btn-primary",style: "background-color: #91D6F1;"%>
-    </div>
-  </div>
+	<div id="rating-form">
+		<label>Rating</label>
+	</div>
+  <div id="rating-form">
+		<%= f.input :comment, :style => size="10" %>
+	</div>
+	
+	<%= f.button :submit, :class => "btn-custom2" %>
 <% end %>
+
+<script>
+	$('#rating-form').raty({
+		scoreName: 'review[rating]'
+	});
+</script>
+</center>

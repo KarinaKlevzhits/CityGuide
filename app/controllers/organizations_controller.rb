@@ -11,7 +11,13 @@ class OrganizationsController < ApplicationController
   end
 
   # GET /organizations/1 or /organizations/1.json
-  def show; end
+  def show
+    if @organization.reviews.blank?
+      @average_review = 0
+    else  
+      @average_review = @organization.reviews.average(:rating).round(2)
+    end
+  end
 
   # GET /organizations/new
   def new

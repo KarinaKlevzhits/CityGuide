@@ -1,7 +1,9 @@
 <div class="review-rating" data-score="<%= review.rating %>"></div>
-<p><%= review.comment %></p>
+<p class= "review-comment"><%= review.comment %></p>
 
 <% if review.user_id == current_user.id %>
-    <%= link_to "Edit", edit_organization_review_path(review.organization, review) %>
-    <%= link_to "Delete", organization_review_path(review.organization, review), method: :delete, data: { confirm: "Are you sure?" } %>
+    <div class="links btn-group">
+    <%= link_to "Edit", edit_organization_review_path(review.organization, review),class: "btn btn-custom" %>
+    <%= link_to "Delete", organization_review_path(review.organization, review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
+    </div>
 <% end %>
