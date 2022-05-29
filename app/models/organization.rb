@@ -33,4 +33,8 @@ class Organization < ApplicationRecord
   validates :title, length: { in: 3..70 }
   validates :min_price, :price_one_hour, :price_two_hours,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
+
+  def self.search(keyword)
+    where(["title ILIKE ?", "%#{keyword}"])
+  end
 end

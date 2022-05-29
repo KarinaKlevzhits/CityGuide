@@ -69,8 +69,12 @@
     <%= link_to "Add Review", new_organization_review_path(@organization), class: "btn-custom"%>
 </div>
 <br>
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<% if @organization.user.id == current_user.id%>
+  <%= link_to 'Edit', edit_organization_path(@organization) %> |
+  <%= link_to 'Back', organizations_path %>
+<% else %>
 <%= link_to 'Back', organizations_path %>
+<% end %>
 <script>
   (function($) {
     'use strict';

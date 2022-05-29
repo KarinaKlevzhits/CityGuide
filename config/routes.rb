@@ -30,4 +30,5 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     omniauth_callbacks: 'omniauth'
   }
+  get 'search', to: 'organizations#search'
 end

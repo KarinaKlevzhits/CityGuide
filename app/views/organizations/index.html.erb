@@ -1,37 +1,38 @@
 <h1>Organizations</h1>
 <br>
-<div class="row">
-
-		<% @organizations.each do |organization| %>
-
-			<div class="col-md-4">
-      <a href="/organizations/<%= organization.id %>">
-        <%= image_tag organization.images.first.variant(resize_to_limit: [300, 300]).processed, :style => "border-radius: 10px;" %>
-			</a>
-      <p><%= organization.title %><p>
-      <p><%= organization.place.name %><p>
-      <p><%= organization.type_of_services %><p>
-      <% if current_user.is_admin %>
-          <% if organization.status != "approved"%>
-          <td><%= link_to 'Approve', approve_organizations_path(id: organization.id), method: :put %></td>
-          <% else %>
-          <td><%= link_to 'Edit', edit_organization_path(id: organization.id) %></td>
-          <% end%>
-          <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% elsif organization.user_id == current_user.id%>
-        <%= link_to 'Edit', edit_organization_path(id: organization.id) %></td>
-        <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </div>	
-
-		<% end %>
-        
-</center>
-<br>
-<%= link_to 'New Organization', new_organization_path %> </br>
+<%= link_to 'New Organization', new_organization_path, class: "btn-custom"%><br><br>
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <% @organizations.each do |organization| %>
+      <div class="col">
+        <div class="card" style="margin-left: 5px; margin-top: 15px; width: 350px; height: 355px; border-radius: 20px">
+        <a href="/organizations/<%= organization.id %>">
+          <%= image_tag organization.images&.first&.variant(resize_to_limit: [300, 300])&.processed, class: "bd-placeholder-img card-img-top", style: "width: 350px; height: 200px; border-radius: 20px 20px 0 0"%>
+ 			  </a>
+          <div class="card-body">
+            <h5 class="card-title"><%= organization.title %></h5>
+            <p class="card-text">
+              <%= organization.place.name %>
+            </p>
+            <% if current_user.is_admin %>
+              <% if organization.status != "approved"%>
+                <%= link_to 'Approve', approve_organizations_path(id: organization.id), method: :put %>
+              <% else %>
+                <%= link_to 'Edit', edit_organization_path(id: organization.id) %>
+              <% end%>
+                <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% elsif organization.user_id == current_user.id%>
+              <%= link_to 'Edit', edit_organization_path(id: organization.id) %>
+              <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %><br>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div><br>
 <% if current_user.is_admin %>
-<%= link_to 'Back', admin_view_url, method: :get %>
+  <%= link_to 'Back', admin_view_url, method: :get, class: "btn-custom" %>
 <% else %>
-<%= link_to 'Back', main_url, method: :get %>
+  <%= link_to 'Back', main_url, method: :get, class: "btn-custom" %>
 <% end %>
-

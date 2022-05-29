@@ -12,11 +12,11 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1 or /organizations/1.json
   def show
-    if @organization.reviews.blank?
-      @average_review = 0
-    else  
-      @average_review = @organization.reviews.average(:rating).round(2)
-    end
+    @average_review = if @organization.reviews.blank?
+                        0
+                      else
+                        @organization.reviews.average(:rating).round(2)
+                      end
   end
 
   # GET /organizations/new
@@ -61,6 +61,12 @@ class OrganizationsController < ApplicationController
   def approve
     @organization.update(status: 'approved')
     ApproveNotificationOrganizationJob.perform_later(@organization.user)
+  end
+
+  def search 
+    @organizations = Organization.search(params[:keyword])
+    @keyword = params[:keyword]
+    render 'index'
   end
 
   private

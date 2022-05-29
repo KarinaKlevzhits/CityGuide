@@ -39,13 +39,18 @@
   }
   document.addEventListener("DOMContentLoaded", showOrganizations);  
 </script>
+
 <meta name='turbolinks-visit-control' content='reload' >
 <center>
+<div class="col-md-6 col-md-offset-3">
+
+	<div class="route-info">
   <div class="col-sm">
     <div id="map"></div>
   </div>
+</div>
 </center>
 <br />
-<%= button_to 'All organizations', organizations_path, method: :get, class: "btn btn-primary", style: "background-color: #91D6F1; height:50px; width:200px"%><br />
-<%= button_to 'All routes', routes_path, method: :get, class: "btn btn-primary", style: "background-color: #91D6F1; height:50px; width:200px"%><br />
-<%= button_to 'All users', profiles_path, method: :get, class: "btn btn-primary", style: "background-color: #91D6F1; height:50px; width:200px"%>
+<%= button_to 'All organizations', organizations_path, method: :get, class: "btn-custom", style: "height:50px; width:200px"%><br />
+<%= button_to 'All routes', routes_path, method: :get, class: "btn-custom", style: "height:50px; width:200px"%><br />
+<%= button_to 'All users', profiles_path, method: :get, class: "btn-custom", style: "height:50px; width:200px"%>
