@@ -1,80 +1,3 @@
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script>
-  function initMap(lat, lng) {
-      var myCoords = new google.maps.LatLng(lat, lng);
-      var mapOptions = {
-          center: myCoords,
-          zoom: 14
-      };
-
-      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      var marker = new google.maps.Marker({
-          position: myCoords,
-          map: map
-      });
-  }
-</script>
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
-  <script>
-    document.addEventListener("DOMContentLoaded", function(){
-
-        initMap(<%=@organization.place.latitude%>, <%=@organization.place.longitude%>)
-      });
-  </script>
-<% end %>
-<div class="row">
-  <div class="col-md-4">
-  </div>
-  <center>
-    <div class="col-md-8">
-      <div class="organization-info">
-        <div class="image">
-          <% if @organization.images.attached? %>
-            <% @organization.images.each do |image| %>
-              <%= image_tag image.variant(resize_to_limit: [300, 3000]).processed, :style => "border-radius: 10px;" %>
-            <% end %>
-          <% end %>
-        </div>
-        <h2 class="organization-title"><%= @organization.title %></h2>
-        <h3 class="organization-name-place"><%= @organization.place.name %></h3>
-        <h2 class="avg-rating">Average Rating</h2>
-        <div class="average-review-rating" data-score=<%= @average_review %>></div>
-        <span class="number-of-reviews">Based on <%= @organization.reviews.count %> reviews</span>
-        <center>
-          <p>
-            <div id="map"></div>
-          </p>
-        </center>
-        <p>Visit price: <%= @organization.min_price %></p>
-        <p>Min visit time: <%= @organization.min_time %> minute</p>
-        <p>Start work: <%= @organization.start_work.strftime('%H:%M') %></p>
-        <p>End work: <%= @organization.end_work.strftime('%H:%M') %></p>
-        <p>Type of service: <%= @organization.type_of_services %></p>
-        <% if @organization.user.id == current_user.id? %>
-          <p>Status: <%= @organization.status %></p>
-        <% end %>
-        <div class="col-md-4">
-          <h3>Reviews</h3>
-          <%= render @organization.reviews %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<br>
-
-<div>
-    <%= link_to "Add Review", new_organization_review_path(@organization), class: "btn-custom"%>
-</div>
-<br>
-<% if @organization.user.id == current_user.id%>
-  <%= link_to 'Edit', edit_organization_path(@organization) %> |
-  <%= link_to 'Back', organizations_path %>
-<% else %>
-<%= link_to 'Back', organizations_path %>
-<% end %>
 <script>
   (function($) {
     'use strict';
@@ -825,19 +748,22 @@
 
   })(jQuery);
 </script>
+<center>
+<%= simple_form_for([@organization, @organization.reviews.build]) do |f| %>
+	<div id="rating-form">
+		<label>Rating</label>
+	</div>
+  <div id="rating-form">
+    <%= f.label :comment %>
+    <%= f.text_field :comment, :style => "padding: 20px 10px; line-height: 28px;" %>
+	</div>
+	
+	<%= f.button :submit, :class => "btn-custom2" %>
+<% end %>
+
 <script>
-  $('.review-rating').raty({
-  	readOnly: true,
-  	score: function() {
-  		return $(this).attr('data-score');
-  	}
-  });
+	$('#rating-form').raty({
+		scoreName: 'review[rating]'
+	});
 </script>
-<script>
-  $('.average-review-rating').raty({
-  	readOnly: true,
-  	score: function() {
-  		return $(this).attr('data-score')
-  	}
-  });
-</script>
+</center>

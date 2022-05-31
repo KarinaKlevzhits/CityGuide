@@ -57,8 +57,8 @@
   </script>
   <meta name='turbolinks-visit-control' content='reload'>
 <% end %>
-<%= form_with(model: organization) do |form| %>
-  <% if organization.errors.any? %>
+<%= simple_form_for @organization, :html => { :multipart => true } do |form| %>
+  <% if @organization.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(organization.errors.count, 'error') %> prohibited this organization from being saved:</h2>
       <ul>
@@ -68,6 +68,7 @@
       </ul>
     </div>
   <% end %>
+   <div class="form-group">
   <div class="field">
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true, type: 'file' %>
@@ -128,6 +129,7 @@
     </center>
   <% end %>
   <div class="actions">
-    <%= form.submit class: "btn btn-primary", style: "background-color: #91D6F1;"%>
+    <%= form.submit :class => 'btn-custom2'%>
   </div>
+</div>
 <% end %>

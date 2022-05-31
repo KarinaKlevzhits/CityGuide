@@ -1,3 +1,6 @@
+ <center>
+ <div class="col-md-8">
+      <div class="organization-info">
 <p>
   <strong>Photo:</strong>
   <div class="circular_image">
@@ -38,7 +41,9 @@
   <strong>Email address:</strong>
   <%= @profile.email_address %>
 </p>
-
+</div>
+</div>
+</center>
 <%= link_to 'Edit', edit_profile_path(@profile) %> <br />
 <% if !current_user.is_admin%>
 <%= link_to 'Main page', main_url, method: :get %><br />

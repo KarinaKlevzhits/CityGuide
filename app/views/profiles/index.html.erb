@@ -1,7 +1,9 @@
 <center>
-<h1>Profiles</h1>
-<table>
-  <thead>
+<h1>Profiles</h1><br>
+<%= link_to 'New Profile', new_profile_path, class: "btn-custom" %>
+<br><br>
+<table class="table table-bordered" style="width:100%">
+  <thead style="background-color: #B9E1F1">
     <tr>
       <th>Name</th>
       <th>Surname</th>
@@ -15,7 +17,7 @@
   </thead>
     <tbody>
       <% @profiles.each do |profile| %>
-        <td><%= profile.name %></td>
+        <td><%= profile.name %></td> 
         <td><%= profile.surname %></td>
         <td><%= profile.birthday %></td>
         <td><%= profile.note %></td>
@@ -35,6 +37,5 @@
 </center>
 <br>
 <% if current_user.is_admin %>
-<%= link_to 'Back', admin_view_url, method: :get%> <br />
+<%= link_to 'Back', admin_view_url, method: :get%>
 <% end %>
-<%= link_to 'New Profile', new_profile_path %>

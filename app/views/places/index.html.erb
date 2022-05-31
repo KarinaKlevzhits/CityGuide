@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Places</h1>
-
+<br>
+<%= link_to 'New Place', new_place_path, class: "btn-custom" %>
+<br><br>
 <table>
   <thead>
     <tr>
@@ -25,7 +27,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Place', new_place_path %>
